@@ -1,0 +1,17 @@
+---
+- hosts: all
+  tasks:
+    - name: install required software
+      apt: name={{ item }} state=latest
+      sudo: yes
+      with_items:
+        - ruby
+        - bundler
+        - sqlite
+        - libsqlite3-dev
+        - nodejs
+
+    - name: install ruby packages
+      command: bundle install
+      args:
+        chdir: /vagrant
